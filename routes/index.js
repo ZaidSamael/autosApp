@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+var Mazda = require('../models/autos');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -22,6 +24,23 @@ router.get('/rollsroyce',function(req,res,next){
 	inforollsroyce.anioFundacion=1904
 	inforollsroyce.logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Logo_Rolls_Royce_por_Hernando.svg/250px-Logo_Rolls_Royce_por_Hernando.svg.png"
 	res.render('rollsroyce',inforollsroyce);
+});
+
+router.post('/alta',function(req,res,next){
+	//crear un objeto mongo
+	// hacer el insert
+	var miMazda = Mazda({
+		nombre:req.body.nombre,
+		foto: req.body.foto
+	});
+
+	miMazda.save(function(err,data){
+		if(err) {console.log('error');}
+		else{
+			res.render('resultadoAlta', data);
+		}
+	});
+
 });
 
 module.exports = router;

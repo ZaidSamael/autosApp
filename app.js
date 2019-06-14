@@ -2,7 +2,13 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+ var logger = require('morgan');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://developer:v6tb1y16xO8sNgBu@cluster0-xhjia.gcp.mongodb.net/autosdb',{useNewUrlParser:true}).then(
+	()=>{
+		console.log('Conectado');
+	}
+	);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+var Mazda = require('../models/autos');
+
 
 router.get('/mazda',function(req,res,next){
-	var data={autos:[]};
+	/*var data={autos:[]};
 	var auto={};
 	auto.nombre="Mazda 3";
 	auto.foto="https://www.mazda.mx/siteassets/mazda-mx/mycos-2019/mazda-3-sedan/vlp/versiones/mazda-3-sedan-vlp-versiones-i.jpg";
@@ -37,10 +40,15 @@ router.get('/mazda',function(req,res,next){
 	auto.nombre="Mazda CX-3";
 	auto.foto="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj6o9xUZchg7BaMyhPd-22KmwI-gL1x6bLp5Nou9hL92jKMzOa";
 	data.autos.push(auto);
+	*/
+	Mazda.find({},function(err,data){
+		console.log(data);
+	var x={autos:data}
+	res.render("./galerias/mazda", x);
 
-	console.log(data);
+	});
 
-	res.render("./galerias/mazda", data);
+	
 });
 
 module.exports = router;
